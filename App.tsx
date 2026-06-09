@@ -7,6 +7,8 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import ProjectModal from './components/ProjectModal';
+import ClosedCaseStudy, { isProjectUnlocked, clearProjectUnlock } from './components/ClosedCaseStudy';
+import CXOCaseStudy from './components/CXOCaseStudy';
 import CustomCursor from './components/CustomCursor';
 import FloatingLinkedIn from './components/FloatingLinkedIn';
 import { ProjectItem } from './types';
@@ -16,6 +18,7 @@ function ProjectPage() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
   const project = PROJECTS_DATA.find(p => p.id === projectId);
+  const [unlockedId, setUnlockedId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!project) navigate('/', { replace: true });
@@ -23,13 +26,38 @@ function ProjectPage() {
 
   if (!project) return null;
 
+  const unlocked = unlockedId === project.id || isProjectUnlocked(project.id);
+  const needsGate = !!project.locked && !unlocked;
+
+  // Closing a locked case study re-locks it: next visit asks for the password again.
+  const closeAndRelock = () => {
+    if (project.locked) {
+      clearProjectUnlock(project.id);
+      setUnlockedId(null);
+    }
+    navigate('/');
+  };
+
   return (
     <div className="bg-dark min-h-screen text-light selection:bg-accent selection:text-black">
-      <div className="hidden md:block">
-        <CustomCursor />
-      </div>
-      <FloatingLinkedIn />
-      <ProjectModal project={project} onClose={() => navigate('/')} />
+      {/* The CXO experience (gate + case study) has its own visual system — keep portfolio chrome out */}
+      {!project.locked && (
+        <div className="hidden md:block">
+          <CustomCursor />
+        </div>
+      )}
+      {!project.locked && <FloatingLinkedIn />}
+      {needsGate ? (
+        <ClosedCaseStudy
+          project={project}
+          onUnlock={() => setUnlockedId(project.id)}
+          onClose={() => navigate('/')}
+        />
+      ) : project.locked ? (
+        <CXOCaseStudy project={project} onClose={closeAndRelock} />
+      ) : (
+        <ProjectModal project={project} onClose={closeAndRelock} />
+      )}
     </div>
   );
 }

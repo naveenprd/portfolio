@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="720" viewBox="0 0 1680 720">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#1c1f0a"/>
+      <stop offset="60%" stop-color="#101010"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1680" height="720" fill="url(#glow)"/>
+  <rect width="1680" height="720" fill="url(#grid)"/>
+  <g transform="translate(840,310)">
+    <rect x="-37" y="-22" width="74" height="58" rx="10" fill="none" stroke="#ccff00" stroke-width="5"/>
+    <path d="M -22 -22 v -14 a 22 22 0 0 1 44 0 v 14" fill="none" stroke="#ccff00" stroke-width="5"/>
+    <circle cx="0" cy="4" r="7" fill="#ccff00"/>
+    <rect x="-3.5" y="6" width="7" height="16" rx="3" fill="#ccff00"/>
+  </g>
+  <text x="840" y="436" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="64" font-weight="700" letter-spacing="14" fill="#f4f4f5">CXO</text>
+  <text x="840" y="486" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" letter-spacing="8" fill="#9ca3af">CLOSED CASE STUDY — NDA</text>
+</svg>

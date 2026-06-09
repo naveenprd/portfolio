@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PROJECTS_DATA } from '../data';
 import { ProjectItem } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Lock } from 'lucide-react';
 
 interface ProjectsProps {
   onProjectClick: (project: ProjectItem) => void;
@@ -58,7 +58,13 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
             >
               <div className="flex flex-col gap-6 pr-12 md:pr-20">
                  <div className="flex flex-col items-start gap-4">
-                    <span className="text-accent font-mono text-xs uppercase tracking-widest opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-widest opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                        {project.locked && (
+                            <>
+                                <Lock size={12} aria-hidden="true" />
+                                <span className="sr-only">Password protected.</span>
+                            </>
+                        )}
                         {project.tags.join(' • ')}
                     </span>
                     <h3 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-transparent text-stroke-light group-hover:text-light transition-colors duration-300 flex flex-col gap-2" 
@@ -80,7 +86,9 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
               
               {/* Arrow Icon */}
               <div className="absolute top-1/2 right-0 -translate-y-1/2 opacity-0 group-hover:opacity-100 -translate-x-10 group-hover:translate-x-0 transition-all duration-300">
-                  <ArrowUpRight size={48} className="text-accent" />
+                  {project.locked
+                    ? <Lock size={48} className="text-accent" aria-hidden="true" />
+                    : <ArrowUpRight size={48} className="text-accent" aria-hidden="true" />}
               </div>
             </motion.div>
           ))}

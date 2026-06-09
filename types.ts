@@ -50,6 +50,10 @@ export interface ProjectItem {
   tags: string[];
   description: string;
   imageUrl: string;
+  /** Closed (NDA) case study: gated behind a password before content is shown. */
+  locked?: boolean;
+  /** SHA-256 hex digest of the unlock password. */
+  passwordHash?: string;
   detailedContent?: {
     problem: string;
     solution: string;
@@ -64,7 +68,7 @@ export interface ProjectItem {
     
     targetAudience?: {
       primary: string;
-      secondary: string;
+      secondary?: string;
     };
     
     challenges?: string[] | { title: string; description: string }[];
@@ -120,6 +124,11 @@ export interface ProjectItem {
       evolution: string;
       reuse: string;
     };
+
+    /** Customer/third-party results shown as cards in Solution & Impact. */
+    proofPoints?: { value: string; label: string }[];
+    /** Small attribution footnote under the impact metrics. */
+    outcomeNote?: string;
 
     solutionImages?: string[];
     processSteps?: { title: string; description: string }[];

@@ -9,18 +9,31 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    // Anchor keyboard/screen-reader position at the top of the case study
+    // (matters when this mounts in place of the password gate).
+    containerRef.current?.focus({ preventScroll: true });
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onClose]);
+
   if (!project.detailedContent) return null;
   const { detailedContent } = project;
 
   return (
-    <div className="fixed inset-0 z-[110] bg-dark/95 backdrop-blur-md overflow-y-auto cursor-auto">
+    <div ref={containerRef} tabIndex={-1} className="fixed inset-0 z-[110] bg-dark/95 backdrop-blur-md overflow-y-auto cursor-auto outline-none">
         <div className="min-h-full w-full bg-dark text-light selection:bg-accent selection:text-black pb-20">
             {/* Header */}
             <div className="sticky top-0 z-50 bg-dark/90 backdrop-blur-lg border-b border-white/10 px-6 py-4 flex justify-between items-center">
@@ -117,17 +130,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                         <div className="space-y-8">
                             <h2 className="text-3xl font-display font-bold text-white">The Challenge</h2>
                             
-                            {/* Small Highlight Section (Stats/Metrics) */}
-                            {detailedContent.measurableDelta ? (
-                                <div className="grid sm:grid-cols-3 gap-4">
-                                    {detailedContent.measurableDelta.metrics.map((stat, idx) => (
-                                        <div key={idx} className="bg-accent/10 border border-accent/20 p-6">
-                                            <div className="text-3xl md:text-4xl font-bold text-accent mb-2 font-display">{stat.value}</div>
-                                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : detailedContent.research?.stats && (
+                            {/* Problem-framing stats (impact metrics render in Solution & Impact) */}
+                            {detailedContent.research?.stats && (
                                 <div className="grid sm:grid-cols-3 gap-6">
                                     {detailedContent.research.stats.map((stat, idx) => (
                                         <div key={idx} className="bg-white/5 border border-white/10 p-8">
@@ -248,14 +252,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                                                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-accent mb-2">Decision</h4>
                                                     <p className="text-sm text-white font-medium">{decision.decision}</p>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-white/10">
+                                                <div className="mt-6 pt-4 border-t border-white/10 space-y-4">
                                                     <div>
                                                         <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Trade-off</h4>
                                                         <p className="text-xs text-gray-400">{decision.tradeOff}</p>
                                                     </div>
-                                                    <div>
-                                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-500 mb-2">Outcome</h4>
-                                                        <p className="text-xs text-gray-400">{decision.outcome}</p>
+                                                    <div className="bg-accent/5 border-l-2 border-accent p-4">
+                                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-accent mb-2">Outcome</h4>
+                                                        <p className="text-sm text-gray-100 leading-relaxed">{decision.outcome}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -664,13 +668,44 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                         <p className="text-xl text-gray-400 leading-relaxed font-light mb-12">
                             {detailedContent.solution}
                         </p>
-                         <div className="bg-accent text-black p-12 md:p-16 text-center relative overflow-hidden">
-                            <div className="absolute inset-0 bg-white/20 mix-blend-overlay"></div>
-                            <p className="relative z-10 text-2xl md:text-4xl font-display font-bold leading-tight">
-                                "{detailedContent.outcome}"
+
+                        <div className="border-l-2 border-accent pl-6 md:pl-10 py-2 mb-12">
+                            <p className="text-xl md:text-2xl text-white font-light leading-relaxed max-w-4xl">
+                                {detailedContent.outcome}
                             </p>
                         </div>
 
+                        {detailedContent.measurableDelta && (
+                            <div className="mb-10">
+                                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Platform Outcomes</h3>
+                                <div className="grid sm:grid-cols-3 gap-4">
+                                    {detailedContent.measurableDelta.metrics.map((stat, idx) => (
+                                        <div key={idx} className="bg-accent/10 border border-accent/20 p-6">
+                                            <div className="text-3xl md:text-4xl font-bold text-accent mb-2 font-display">{stat.value}</div>
+                                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {detailedContent.proofPoints && detailedContent.proofPoints.length > 0 && (
+                            <div className="mb-6">
+                                <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Customer Results</h3>
+                                <div className="grid sm:grid-cols-3 gap-4">
+                                    {detailedContent.proofPoints.map((stat, idx) => (
+                                        <div key={idx} className="bg-white/5 border border-white/10 p-6">
+                                            <div className="text-3xl md:text-4xl font-bold text-white mb-2 font-display">{stat.value}</div>
+                                            <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {detailedContent.outcomeNote && (
+                            <p className="text-xs text-gray-500 italic">{detailedContent.outcomeNote}</p>
+                        )}
                     </section>
 
                     {/* 6.5 Learnings & Next Steps */}

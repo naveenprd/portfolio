@@ -59,6 +59,29 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
+    id: 'cxo',
+    title: 'CXO',
+    subtitle: 'The Agentic Retail OS — Closed Case Study',
+    tags: ['Platform Design', 'Design System', 'AI', 'NDA'],
+    description: 'One design system, four AI apps. The platform OS unifying Streamoid\'s agentic products. Password required.',
+    imageUrl: '/images/cxo-banner.svg',
+    locked: true,
+    // SHA-256 of the unlock password (see ClosedCaseStudy component)
+    passwordHash: '340e6f1b523e6f53e332741db66b1f143f2bd17bbc6eca0273aeb074616526b2',
+    detailedContent: {
+      role: 'Senior Product Designer',
+      timeline: '2024 - Present',
+      tools: ['Figma', 'Design Systems', 'Prototyping Tools'],
+      targetAudience: {
+        primary: 'Confidential — detailed in the full case study.',
+      },
+      problem: 'This engagement is protected under a non-disclosure agreement. The full problem statement, research artifacts, and design process are available in the unlocked case study.',
+      solution: 'Placeholder — replace with the NDA-safe solution narrative once unlocked content is finalized.',
+      outcome: 'Placeholder — replace with measurable outcomes once unlocked content is finalized.',
+      images: [],
+    }
+  },
+  {
     id: 'piqit',
     title: 'Piqit.in',
     subtitle: 'Mobile-First Fashion Styling Ecosystem',
@@ -236,108 +259,170 @@ export const PROJECTS_DATA: ProjectItem[] = [
   {
     id: 'catalogix',
     title: 'Catalogix.ai',
-    subtitle: 'Enterprise AI for Fashion Operations',
-    tags: ['SaaS', 'AI', 'B2B', 'Design System'],
-    description: 'An AI-powered tool using Computer Vision to automate product tagging and publishing for global retailers.',
+    subtitle: 'AI Agents that List Products on Every Channel',
+    tags: ['B2B SaaS', 'AI', 'Enterprise', 'Design System'],
+    description: 'The catalog engine of an agentic retail platform — AI structures product data and publishes it to every marketplace, with humans approving what ships.',
     imageUrl: '/images/Catalogix banner.webp',
     detailedContent: {
-      role: 'Lead Product Designer & Frontend Architect',
+      role: 'Senior Product Designer',
       timeline: '2021 - Present',
-      tools: ['Figma', 'React', 'TypeScript', 'Ag-Grid', 'Python (AI)'],
+      tools: ['Figma', 'FigJam', 'Design Tokens', 'Usability Testing'],
       targetAudience: {
-        primary: 'Enterprise Fashion Merchandisers and Catalog Operations Managers.',
-        secondary: 'Data Entry Specialists and E-commerce SEO Teams.'
+        primary: 'Catalog, content, and ecommerce teams at fashion brands and marketplaces — the people who get thousands of styles live each season.',
+        secondary: 'Operations and merchandising leaders scaling SKU counts and channels without scaling headcount.'
       },
-      problem: 'Retailers faced a "Content Bottleneck" processing thousands of daily SKUs manually via spreadsheets. Inconsistent data led to poor search relevance, high returns, and delayed time-to-market.',
+      problem: 'Every marketplace speaks its own language — its own templates, taxonomies, attribute rules, and rejection logic. Fashion brands were stitching together spreadsheets, supplier feeds, and PIM exports, then manually re-mapping the same product for Amazon, Myntra, Flipkart, Zalando, and a dozen more channels. Listings took weeks, rejections were discovered only after upload, and every new channel multiplied the work instead of adding to it.',
       goals: [
-        'Accelerate "Time-to-Market" for new seasonal inventory by 50%.',
-        'Reduce manual data entry errors and marketplace rejections by 90%.',
-        'Architect a high-performance "Human-in-the-Loop" workflow for AI validation.',
-        'Standardize complex fashion taxonomies across diverse global marketplaces.'
+        'Design one workflow that takes messy source data to channel-ready listings — map once, publish everywhere.',
+        'Make AI output verifiable at a glance: a human should always know what the model filled in, how confident it is, and how to fix it.',
+        'Carry enterprise governance — multi-stage approvals, roles, audit trails — without slowing down teams pushing thousands of SKUs through each seasonal drop.',
+        'Build a design system that lets one designer cover an entire platform: seven product surfaces, one language.'
       ],
       research: {
-        stats: [
-          { value: '40%', label: 'Reduction in Cataloging Time' },
-          { value: '98%', label: 'Attribute Accuracy Achieved' },
-          { value: '10k+', label: 'SKUs Processed Daily' }
-        ],
         insights: [
-            'Merchandisers trust AI but require strict verification; the UI must instantly highlight low-confidence predictions.',
-            'Power users demand keyboard-first navigation for speed, avoiding mouse interaction whenever possible.',
-            'A split-screen view (Product Image vs. Data Grid) is non-negotiable for accurate visual validation.',
-            'Bulk action capabilities are critical for managing massive seasonal inventory uploads.'
+            'Catalog teams think in "styles," not SKUs — five size variants are one product in their head. The data model said otherwise; the UI had to take the team\'s side.',
+            'Trust in AI dies the first time it is wrong silently. Teams happily accept partial automation if the remainder is clearly flagged and easy to repair.',
+            'Rejection debugging was the single most hated task — hours lost per upload. "Fix it before it ships" beat "report it after" in every conversation.',
+            'Every channel adds a schema, not just a destination: required fields, controlled vocabularies, image rules, and templates that change without notice.'
         ]
       },
-      
-      personas: [
+
+      operatingRange: {
+        scope: 'Sole designer for the entire product: workspace console, store catalog, product record, import pipeline, taxonomy builder, AI training console, and review/repair flows — plus the design system underneath all of them.',
+        ambiguity: 'Joined when this was internal cataloging tooling; designed through the company\'s 2023 pivot from services to software and its repositioning as an agentic platform. The object model and information architecture had to survive each shift.',
+        dependencies: [
+          'CV/ML team (attribute-extraction models)',
+          'Marketplace integration engineering',
+          'Customer ops & onboarding teams',
+          'Founders / GTM on positioning shifts'
+        ]
+      },
+
+      measurableDelta: {
+        before: 'Brand teams manually re-mapped every product per channel from spreadsheets and PIM exports. New listings took weeks, rejections surfaced after upload, and each new channel needed vendor support or dedicated headcount.',
+        after: 'One canonical product record, AI-prefilled and human-verified, publishing to every channel — including ones with no API. The platform takes brands from brief to live listing in under 48 hours.',
+        whyItMoved: 'These are platform-level outcomes as Streamoid publishes them. What the catalog design contributed: AI prefill with visible confidence removed the typing; map-once channel overlays removed the re-work; pre-publish validation moved rejection-fixing from after upload to before it; and repair loops kept products moving without escalations.',
+        metrics: [
+          { value: '<48 hrs', label: 'Brief to Live Listing' },
+          { value: '80%', label: 'Lower Cost per SKU (up to)' },
+          { value: '10x', label: 'Seasonal Output Increase (up to)' }
+        ]
+      },
+
+      decisionPoints: [
         {
-          name: 'Maya, Senior Merchandiser',
-          role: 'Catalog Quality Lead',
-          bio: 'Responsible for publishing 500+ items weekly. She creates the "Gold Standard" for product data but is constantly bogged down by managing complex Excel sheets and marketplace rules.',
-          goals: ['Validate AI-generated tags rapidly', 'Execute bulk edits across seasonal collections', 'Export compliant data to Amazon/Myntra seamlessly'],
-          painPoints: ['Repetitive, manual data entry', 'Constant context-switching between image folders and spreadsheets', 'System lag when handling large datasets']
+          context: 'Each marketplace needs different attributes, media rules, and vocabularies for the same product. The obvious design was a separate listing copy per channel — it is also how most competitors worked.',
+          decision: 'One canonical product record with per-channel overlays: a Core Attribute set plus channel tabs (Amazon, Flipkart, Myntra, MANGO…) that inherit, override, or extend it — with linked attributes marked explicitly.',
+          tradeOff: 'A heavier mental model upfront — users had to learn inheritance instead of editing flat copies. We paid that cost once in onboarding rather than forever in divergent data.',
+          outcome: '"Fix once, sync everywhere" became the product\'s core promise. Channel data cannot silently drift, and adding a channel is additive work, not multiplicative.'
         },
         {
-          name: 'Raj, Operations Manager',
-          role: 'Head of Catalog Operations',
-          bio: 'Oversees a team of 20+ data operators. Needs high-level visibility into throughput, AI accuracy, and team error rates to optimize operational costs.',
-          goals: ['Monitor real-time team productivity', 'Ensure strict data consistency across brands', 'Drastically reduce operational costs and marketplace rejections'],
-          painPoints: ['Lack of real-time reporting dashboards', 'High training overhead for new staff on complex taxonomies', 'Inability to track AI model performance over time']
+          context: 'Bulk CSV import was the riskiest moment in the funnel: one wrong column mapping poisoned thousands of products, and users blamed the AI for it.',
+          decision: 'A guided four-step wizard — Select Header → Map Attributes → Map Values → Repair — where AI proposes each mapping and the user confirms it, with per-column validity shown before commit ("50% of rows in this column have valid data — 200 of 400").',
+          tradeOff: 'More steps than one-shot auto-import; power users initially pushed back on confirming what the AI had already gotten right.',
+          outcome: 'Errors became visible before they entered the catalog instead of after. Confirmation turned the AI from a black box into a colleague whose work you check.'
+        },
+        {
+          context: 'Brands needed their own taxonomy — but defining attributes per category meant re-declaring "Color" hundreds of times, while global attributes meant nothing fit anyone.',
+          decision: 'Schema inheritance: attributes declared at any node cascade to children, with explicit provenance labels ("Inherited: All Products"), per-node overrides and disables, and a "Hide Inherited" toggle to manage the noise.',
+          tradeOff: 'Inheritance is genuinely harder to design and explain than flat lists — we accepted real UI complexity (provenance, override states) to avoid unscalable duplication.',
+          outcome: '"Build your own taxonomy" became a headline platform capability; enterprise schemas with dozens of categories stay maintainable by a single catalog admin.'
         }
       ],
-      
-      eisenMatrix: {
-        urgentImportant: [
-          'High-Performance Data Grid (Ag-Grid)',
-          'AI Confidence Score Visualization',
-          'Keyboard-First Navigation Support',
-          'Split-Screen Image/Data Validation View'
+
+      engineeringCollab: {
+        edgeCases: [
+          'Channels with no API at all — listings go out via email, FTP, or seller dashboards, yet still need status tracking and daily checks in the same queue.',
+          'Spreadsheets with duplicate or ambiguous columns (two "STYLE ID" columns mapping to one SKU) — the wizard had to disambiguate, not guess.',
+          'Five size SKUs are one "style": every count, quota, and bulk action had to resolve to the unit teams actually think in.',
+          'Partially valid columns (200 of 400 rows clean) — neither auto-accept nor reject; repair is a first-class path.'
         ],
-        notUrgentImportant: [
-          'Historical Data Analytics Dashboard',
-          'Dynamic Custom Taxonomy Builder',
-          'Granular Role-Based Access Control (RBAC)'
+        techConstraints: [
+          'Catalog grids render 1,500+ products with imagery and live team presence — virtualization shaped row design, fixed heights, and column management.',
+          'Model accuracy varies wildly per attribute (fabric composition vs. sleeve length) — the UI could never imply uniform confidence.',
+          'Marketplace templates change without notice; layouts had to absorb schema churn without redesign.'
         ],
-        urgentNotImportant: [
-          'Dark Mode (Requested by engineering)',
-          'Custom Profile Avatars',
-          'Mobile view for approvals (Low actual usage)'
-        ],
-        notUrgentNotImportant: [
-          'Social sharing features',
-          'Task gamification',
-          'In-app chat (Teams/Slack preferred)'
+        tradeOffs: [
+          'Channel forms are generated from schemas with controlled vocabularies (LOV lists) rather than hand-crafted per marketplace — losing pixel-level control per channel, gaining the ability to onboard any new channel schema, from Amazon to no-API marketplaces, without new design work.',
+          'Staged statuses (Draft → Under Review → Approved → Active) add friction to small edits, but enterprise audit requirements made review state non-negotiable — so the system makes state visible everywhere instead of hiding the workflow.'
         ]
       },
-      
+
+      systemThinking: {
+        summary: 'The design system was the survival strategy: one designer, seven surfaces, enterprise customers. Tokens, density rules, and a small set of load-bearing patterns let every new flow start at 80% done.',
+        evolution: 'It began as conventions inside the catalog grid, was extracted into tokens and components as the wizard count grew, and absorbed the company\'s agentic pivot — the same meters, queues, and repair tables that served manual workflows now report what agents did overnight.',
+        reuse: 'The stepper shell is shared by the import and taxonomy wizards; the channel rail is the same component in Multimedia and Information; one completeness-meter pattern expresses approval coverage and required-field progress, and the same percentage language carries import validity and model accuracy through the wizard and the training console; the tree-node card serves both the onboarding taxonomy builder and the admin hierarchy editor.'
+      },
+
       sitemap: [
-        { title: 'Dashboard', items: ['Queue Overview', 'Team Throughput', 'AI Accuracy Metrics'] },
-        { title: 'Import', items: ['Bulk Image Upload', 'CSV Schema Mapping', 'AI Pre-processing Status'] },
-        { title: 'Workstation', items: ['Smart Validation Grid', 'Bulk Editor', 'Audit History Log'] },
-        { title: 'Inventory Master', items: ['Global Catalog', 'Advanced SKU Search', 'Dynamic Filters'] },
-        { title: 'Export', items: ['Marketplace Channel Config', 'Validation Rules Engine', 'Publishing Status'] }
+        { title: 'Workspace Console', items: ['Stores', 'Team & Roles', 'Insights', 'AI Training', 'Developer', 'Billing'] },
+        { title: 'Store Catalog', items: ['Products Grid & Views', 'Collections', 'Asset Library', 'Apps', 'Store Settings'] },
+        { title: 'Product Record', items: ['Channels', 'Information (Core + Per-Channel)', 'Multimedia', 'Variants', 'Related Products', 'Timeline'] },
+        { title: 'Import Pipeline', items: ['Select Header', 'Map Attributes', 'Map Values', 'Review & Repair'] },
+        { title: 'Taxonomy Studio', items: ['Create Hierarchy', 'Define Attributes', 'Inheritance & Overrides'] }
       ],
-      
+
       designSystem: {
-        summary: 'A utility-first design system optimized for data density. Uses a 4pt grid, monospaced typography, and semantic color-coding for AI confidence levels.',
+        summary: 'A light, data-dense system built for eight-hour days in front of product grids: a near-black console shell around a calm white canvas with a single surface gray doing the layering, one decisive indigo for actions and progress, and a strict semantic palette — green always means verified, red always means blocked. Density is a feature: type, spacing, and states are tuned so a thousand-row catalog reads as calm, not chaotic.',
         typography: {
-          fontFamily: 'Roboto & JetBrains Mono',
-          usage: 'Roboto for UI elements; JetBrains Mono for tabular data to ensure vertical alignment and scannability.',
+          fontFamily: 'Inter',
+          usage: 'A single sans family across console and store surfaces. Sizes stay small and unambiguous — page titles barely larger than body; weight and color carry hierarchy so the data keeps the space.',
           scale: [
-            { label: 'H1 Page Title', size: '24px', lineHeight: '1.2', weight: '500' },
-            { label: 'H2 Section', size: '18px', lineHeight: '1.3', weight: '500' },
-            { label: 'Body Data', size: '13px', lineHeight: '1.4', weight: '400' },
-            { label: 'Table Header', size: '11px', lineHeight: '1.4', weight: '600' },
-            { label: 'Code/ID', size: '12px', lineHeight: '1.5', weight: '400' }
+            { label: 'Page Title', size: '20px', lineHeight: '1.3', weight: '600' },
+            { label: 'Section / Card Title', size: '16px', lineHeight: '1.4', weight: '600' },
+            { label: 'Body & Form Labels', size: '14px', lineHeight: '1.5', weight: '400' },
+            { label: 'Table Data', size: '13px', lineHeight: '1.4', weight: '400' },
+            { label: 'Meta & Column Headers', size: '12px', lineHeight: '1.3', weight: '500' }
           ]
         },
         colors: [
-          { name: 'Data Black', hex: '#1F2937', usage: 'Primary Text, Active Data', textColor: '#FFFFFF' },
-          { name: 'Table Gray', hex: '#F9FAFB', usage: 'Zebra Striping, Inactive Cells', textColor: '#1F2937' },
-          { name: 'AI Purple', hex: '#7C3AED', usage: 'AI-Generated Suggestions', textColor: '#FFFFFF' },
-          { name: 'Alert Red', hex: '#EF4444', usage: 'Validation Errors, Low Confidence', textColor: '#FFFFFF' }
+          { name: 'Console Navy', hex: '#111330', usage: 'Navigation shell & wizard frames', textColor: '#FFFFFF' },
+          { name: 'Surface Gray', hex: '#F8F8F8', usage: 'Table headers, hover rows & card fills that lift data off the white canvas', textColor: '#111330' },
+          { name: 'Action Indigo', hex: '#6672F9', usage: 'Primary actions, progress & completeness meters, active states', textColor: '#FFFFFF' },
+          { name: 'Confirm Green', hex: '#06A917', usage: 'Verified mappings, confirmed columns, model gains', textColor: '#FFFFFF' },
+          { name: 'Flag Red', hex: '#FF5453', usage: 'Errors, blocked cells, required gaps', textColor: '#FFFFFF' }
         ]
       },
+
+      features: [
+        { title: 'Smart Import', description: 'AI proposes column mappings with per-column validity scores; users confirm, ignore, or repair before anything touches the catalog.' },
+        { title: 'Per-Channel Product Record', description: 'Core attributes with channel overlays for Amazon, Flipkart, Myntra and more — linked fields, controlled vocabularies, and completeness meters per channel.' },
+        { title: 'Taxonomy Studio', description: 'Visual hierarchy builder with attribute inheritance, provenance labels, and per-node overrides — brands model their own catalog structure.' },
+        { title: 'AI Training Console', description: 'Per-attribute accuracy with deltas against the previous model and sample coverage — ops leads see exactly what improved and what to retrain.' },
+        { title: 'Review & Repair', description: 'Errors block, warnings don\'t. A spreadsheet-style repair surface with inline flagged cells turns rejection debugging into a five-minute pass.' },
+        { title: 'Governed Publishing', description: 'Draft → Under Review → Approved → Active statuses with role-based assignment, team presence, and a full audit trail across every store.' }
+      ],
+
+      processSteps: [
+        { title: 'Sit With the Work', description: 'Shadowed catalog operators processing real seasonal drops to map where the hours actually went — mapping, fixing, re-uploading.' },
+        { title: 'Model the Objects First', description: 'Styles, SKUs, channels, attributes, vocabularies: agreed the object model with engineering before drawing screens, so the IA wouldn\'t crack when channels were added.' },
+        { title: 'System Before Surfaces', description: 'Tokens, density rules, status semantics, and the core patterns — meters, steppers, rails, grids — came first; every subsequent flow assembled from them.' },
+        { title: 'Ship Flow by Flow', description: 'Import, product record, taxonomy, training, repair — each shipped against real enterprise catalogs, with onboarding teams feeding back weekly.' }
+      ],
+
+      challenges: [
+        'Seven channel schemas plus the core record on one product page — without turning it into a tab maze.',
+        'Showing AI confidence honestly at every altitude (cell, column, model) without drowning the grid in chrome.',
+        'Enterprise governance — approvals, roles, audit — that stays out of the way of teams pushing thousands of SKUs through a seasonal drop.'
+      ],
+      solution: 'Catalogix became the catalog engine of an agentic retail platform: AI agents source, structure, and publish product data across every channel, while the UI gives humans the levers that matter — confirm the mapping, approve the listing, repair the flagged rows, retrain the weak attribute. The agent pipeline (Source → Structure → List → Resolve) is mirrored directly in the product\'s information architecture.',
+      outcome: 'Catalogix is the catalog engine of Streamoid\'s platform — 30+ brands including Ajio, ABFRL, and NewMe, 5M+ SKUs a year, published everywhere from Amazon and Myntra to channels with no API at all.',
+      proofPoints: [
+        { value: '90%+', label: 'Data Quality Reported by Ajio' },
+        { value: '<2 days', label: 'Catalog Turnaround at ABFRL' },
+        { value: '70%', label: 'Cataloging Time Saved at NewMe' }
+      ],
+      outcomeNote: 'Platform figures and customer results as published by Streamoid and its customers.',
+      learnings: [
+        'Density is earned, not defaulted: a completeness meter in context beats a dashboard nobody opens.',
+        'AI trust is a UI property. Exposing per-attribute accuracy — including the embarrassing numbers — made teams use the AI more, not less.',
+        'Inheritance without provenance is gaslighting: every inherited value needs to say where it came from and how to override it.',
+        'A design system is how a sole designer ships an enterprise platform. The system was never a side project; it was the job.'
+      ],
+      nextSteps: [
+        'Deepen agent-supervision patterns: overnight runs need morning-after reviews, not real-time monitoring.',
+        'Design the surface for salability scoring — the platform promises every product scored before commit, with reasons and fixes; the score, its reasons, and its fix paths still need a home in the console.'
+      ],
 
       solutionImages: [
         '/images/catalogix images/Catalogix 1.webp',
@@ -349,13 +434,6 @@ export const PROJECTS_DATA: ProjectItem[] = [
         '/images/catalogix images/Catalogix 7.webp',
         '/images/catalogix images/Catalogix 8.webp',
       ],
-      challenges: [
-        'Architecting a UI capable of handling 50+ attributes per product without forcing the user into endless horizontal scrolling.',
-        'Designing an intuitive method to visualize AI "Confidence Scores" without cluttering the dense data grid.',
-        'Engineering frontend performance to maintain 60fps while rendering thousands of complex DOM elements in the validation grid.'
-      ],
-      solution: 'Architected a "Smart Grid" using React and Ag-Grid where AI pre-fills 90% of product data. Engineered a split-pane layout for visual validation, highlighting low-confidence predictions to streamline human-in-the-loop workflows.',
-      outcome: 'Redesigned catalog operations, reducing turnaround time by 40% and improving accuracy to 98%. Catalogix.ai now processes 10,000+ SKUs daily for global brands.',
       images: []
     }
   },
