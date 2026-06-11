@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PROJECTS_DATA } from '../data';
 import { ProjectItem } from '../types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Lock } from 'lucide-react';
 
 interface ProjectsProps {
@@ -9,38 +9,8 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    // Calculate relative position for image tilt/movement if needed, 
-    // simply storing client coordinates for now
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
-
   return (
-    <section id="work" className="relative min-h-screen pb-32 pt-6 pl-[1px] bg-dark z-20" onMouseMove={handleMouseMove}>
-      
-      {/* Fixed Background Image Reveal */}
-      <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center opacity-30 blur-sm">
-         <AnimatePresence mode="wait">
-            {hoveredProject && (
-                <motion.img 
-                    key={hoveredProject}
-                    src={PROJECTS_DATA.find(p => p.id === hoveredProject)?.imageUrl}
-                    alt=""
-                    aria-hidden="true"
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 0.4, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full object-cover grayscale"
-                />
-            )}
-         </AnimatePresence>
-      </div>
-      
-      {/* Floating Preview Image near cursor (Optional - adding a fixed centered one instead for better perf) */}
+    <section id="work" className="relative min-h-screen pb-32 pt-6 pl-[1px] bg-dark z-20">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-0 flex items-end justify-between border-b border-white/10 pb-8">
             <h2 className="text-4xl font-display font-bold text-light">Selected Work</h2>
@@ -52,8 +22,6 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
             <motion.div 
               key={project.id}
               className="group relative border-b border-white/10 last:border-b-0 py-12 cursor-hover transition-transform duration-300 md:hover:translate-x-6"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
               onClick={() => onProjectClick(project)}
             >
               <div className="flex flex-col gap-6 pr-12 md:pr-20">
@@ -67,11 +35,10 @@ const Projects: React.FC<ProjectsProps> = ({ onProjectClick }) => {
                         )}
                         {project.tags.join(' • ')}
                     </span>
-                    <h3 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-transparent text-stroke-light group-hover:text-light transition-colors duration-300 flex flex-col gap-2" 
-                        style={{ WebkitTextStroke: hoveredProject === project.id ? "0px" : "1px #333" }}>
+                    <h3 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-light group-hover:text-accent transition-colors duration-300 flex flex-col gap-2">
                        <span>{project.title.split('(')[0].trim()}</span>
                        {project.title.includes('(') && (
-                           <span className="text-2xl md:text-4xl font-sans font-normal text-gray-400 tracking-normal mt-2" style={{ WebkitTextStroke: "0px" }}>
+                           <span className="text-2xl md:text-4xl font-sans font-normal text-gray-400 tracking-normal mt-2">
                                ({project.title.split('(')[1]}
                            </span>
                        )}

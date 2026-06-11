@@ -43,7 +43,7 @@ const Skills: React.FC = () => {
                   }}
                   className="space-y-6"
                 >
-                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 border-b border-white/10 pb-4">{category.category}</h3>
+                  <h3 className="text-xs font-bold font-mono uppercase tracking-[0.2em] text-gray-500 border-b border-white/10 pb-4">{category.category}</h3>
                   <ul className="space-y-4">
                     {category.items.map((skill, sIdx) => (
                       <motion.li 

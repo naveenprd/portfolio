@@ -42,8 +42,9 @@ const sha256Hex = async (text: string): Promise<string> => {
 /*
  * CXO gate visual system (scoped to the closed case study experience):
  * blueprint canvas #070707, panel #121212, hairline dashed grid white/8,
- * single accent indigo #5B67F2, Inter only — intentionally distinct from
- * the portfolio's lime / Space Grotesk language.
+ * single accent indigo #5B67F2 — intentionally distinct from the portfolio's
+ * lime language. Type follows the site system: Schibsted Grotesk headings,
+ * Roboto body, Roboto Mono kickers.
  */
 const CXO = {
   canvas: '#070707',
@@ -166,12 +167,12 @@ const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, on
           >
             <Lock size={14} style={{ color: CXO.accent }} />
           </div>
-          <span className="text-sm font-semibold tracking-wide text-white">{project.title}</span>
+          <span className="text-sm font-display font-semibold tracking-wide text-white">{project.title}</span>
           <span className="text-sm text-gray-500 hidden sm:inline">Closed Case Study</span>
         </div>
         <div className="flex items-center gap-4">
           <span className="hidden md:inline-flex items-center gap-2 text-xs text-gray-500">
-            <kbd className="px-1.5 py-0.5 rounded border border-white/15 text-[10px] text-gray-400">esc</kbd>
+            <kbd className="px-1.5 py-0.5 rounded border border-white/15 text-[10px] font-mono text-gray-400">esc</kbd>
             to exit
           </span>
           <button
@@ -231,7 +232,7 @@ const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, on
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8, duration: 0.4 }}
-          className="hidden lg:block absolute text-base font-medium text-gray-200 text-right z-10"
+          className="hidden lg:block absolute text-base font-display font-medium text-gray-200 text-right z-10"
           style={{ right: `calc(50% + ${COL + 32}px)`, top: `calc(${BAND_TOP} + 48px)` }}
         >
           Unlock {project.title}
@@ -256,12 +257,12 @@ const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, on
             className="w-full max-w-[640px] rounded-xl border border-white/10 p-6 md:p-8"
             style={{ backgroundColor: CXO.panel }}
           >
-            <h1 className="text-xl md:text-2xl font-semibold text-white mb-2">
+            <h1 className="text-xl md:text-2xl font-display font-semibold text-white mb-2">
               {unlocking ? 'Access granted' : 'Open the case study'}
             </h1>
             <p className="text-sm text-gray-400 leading-relaxed mb-7">
-              This work is protected under NDA. Enter the password you were given, or request
-              access and I'll get back to you quickly.
+              This work is private. Enter the password you were given, or request access
+              and I'll get back to you quickly.
             </p>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-3">

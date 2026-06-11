@@ -50,7 +50,7 @@ export interface ProjectItem {
   tags: string[];
   description: string;
   imageUrl: string;
-  /** Closed (NDA) case study: gated behind a password before content is shown. */
+  /** Closed (private) case study: gated behind a password before content is shown. */
   locked?: boolean;
   /** SHA-256 hex digest of the unlock password. */
   passwordHash?: string;

@@ -14,7 +14,7 @@ const Experience: React.FC = () => {
             <p className="text-gray-400 font-light text-lg leading-relaxed mb-12">
               Leading design teams and crafting products for global brands.
             </p>
-            <a href="/Naveen Manickam Resume.pdf" download className="inline-block px-8 py-3 border border-white/20 text-light text-xs font-bold uppercase tracking-widest hover:bg-light hover:text-dark transition-all cursor-hover">
+            <a href="/Naveen Manickam Resume.pdf" download className="inline-block px-8 py-3 border border-white/20 rounded-full text-light text-xs font-bold uppercase tracking-widest hover:bg-light hover:text-dark transition-all cursor-hover">
               Download Resume
             </a>
           </div>
@@ -28,7 +28,7 @@ const Experience: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group border-l border-white/10 pl-8 md:pl-16 pr-8 md:pr-16 py-16 relative hover:bg-white/5 transition-colors"
+                className="group border-l border-white/10 rounded-r-xl pl-8 md:pl-16 pr-8 md:pr-16 py-16 relative hover:bg-white/5 transition-colors"
               >
                 {/* Timeline Dot */}
                 <div className="absolute left-[-5px] top-20 w-2.5 h-2.5 bg-dark border border-white/30 rounded-full group-hover:bg-accent group-hover:border-accent transition-colors"></div>
@@ -60,7 +60,7 @@ const Experience: React.FC = () => {
                 <h3 className="text-accent font-mono text-xs uppercase tracking-[0.2em] mb-12">Education</h3>
                 <div className="grid md:grid-cols-2 gap-12">
                      {EDUCATION_DATA.map((edu, idx) => (
-                        <div key={idx} className="bg-white/5 p-8 border border-white/5">
+                        <div key={idx} className="bg-white/5 p-8 rounded-xl border border-white/5">
                              <div className="text-xs text-gray-500 mb-4">{edu.period}</div>
                              <h4 className="text-xl font-bold text-light mb-2">{edu.degree}</h4>
                              <p className="text-gray-400 font-light">{edu.institution}</p>

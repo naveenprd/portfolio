@@ -62,7 +62,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: 'cxo',
     title: 'CXO',
     subtitle: 'The Agentic Retail OS — Closed Case Study',
-    tags: ['Platform Design', 'Design System', 'AI', 'NDA'],
+    tags: ['Platform Design', 'Design System', 'AI', 'Closed'],
     description: 'One design system, four AI apps. The platform OS unifying Streamoid\'s agentic products. Password required.',
     imageUrl: '/images/cxo-banner.svg',
     locked: true,
@@ -76,7 +76,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         primary: 'Confidential — detailed in the full case study.',
       },
       problem: 'This engagement is protected under a non-disclosure agreement. The full problem statement, research artifacts, and design process are available in the unlocked case study.',
-      solution: 'Placeholder — replace with the NDA-safe solution narrative once unlocked content is finalized.',
+      solution: 'Placeholder — replace with the shareable solution narrative once unlocked content is finalized.',
       outcome: 'Placeholder — replace with measurable outcomes once unlocked content is finalized.',
       images: [],
     }
@@ -525,6 +525,16 @@ export const PROJECTS_DATA: ProjectItem[] = [
     }
   }
 ];
+
+// Work-list display order: CXO, Catalogix, Piqit, then the rest as authored.
+const PROJECT_DISPLAY_ORDER = ['cxo', 'catalogix', 'piqit'];
+PROJECTS_DATA.sort((a, b) => {
+  const rank = (p: ProjectItem) => {
+    const i = PROJECT_DISPLAY_ORDER.indexOf(p.id);
+    return i === -1 ? PROJECT_DISPLAY_ORDER.length : i;
+  };
+  return rank(a) - rank(b);
+});
 
 export const SKILLS_DATA: SkillItem[] = [
   { category: 'Design & Research', items: ['UX Strategy & User Research', 'Interaction & Visual Design', 'Wireframing & Prototyping', 'Design Systems & Component Libraries'] },

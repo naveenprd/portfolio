@@ -36,7 +36,7 @@ const Contact: React.FC = () => {
 
         <div className="grid md:grid-cols-4 gap-12 border-t border-white/10 pt-12">
              <div className="md:col-span-2">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Status</h4>
+                <h4 className="text-xs font-bold font-mono uppercase tracking-widest text-gray-500 mb-4">Status</h4>
                 <div className="flex items-center gap-2">
                     <span className="relative flex h-3 w-3">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -46,7 +46,7 @@ const Contact: React.FC = () => {
                 </div>
              </div>
              <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Connect</h4>
+                <h4 className="text-xs font-bold font-mono uppercase tracking-widest text-gray-500 mb-4">Connect</h4>
                 <div className="flex flex-col gap-2">
                     <a href={`mailto:${CONTACT_INFO.email}`} className="text-sm hover:text-accent transition-colors cursor-hover">{CONTACT_INFO.email}</a>
                     <a href={`https://${CONTACT_INFO.linkedin}`} target="_blank" rel="noreferrer" className="text-sm hover:text-accent transition-colors cursor-hover">LinkedIn</a>
@@ -56,7 +56,7 @@ const Contact: React.FC = () => {
                 </div>
              </div>
              <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Coordinates</h4>
+                <h4 className="text-xs font-bold font-mono uppercase tracking-widest text-gray-500 mb-4">Coordinates</h4>
                 <p className="text-sm text-gray-400">{CONTACT_INFO.location}</p>
              </div>
         </div>

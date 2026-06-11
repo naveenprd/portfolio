@@ -26,3 +26,6 @@ dist-ssr
 # Claude artifacts
 .claude
 migrated_prompt_history
+
+# CXO source exports (NDA) — the site uses the webp copies in public/images/cxo
+CXO-Assets/
