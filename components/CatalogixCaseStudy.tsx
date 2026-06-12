@@ -19,7 +19,7 @@ interface CatalogixCaseStudyProps {
 const COL = 470;
 
 const CATALOGIX_FACTS = [
-  { label: 'Role', value: 'Senior Product Designer — sole designer across the platform' },
+  { label: 'Role', value: 'Senior Product Designer — end-to-end across the platform' },
   { label: 'Scope', value: 'Console · Catalog · Product record · Import · Taxonomy · AI training · Repair' },
   { label: 'Reach', value: '30+ brands · 5M+ SKUs a year · Amazon to no-API channels' },
 ];
@@ -288,9 +288,9 @@ const CatalogixCaseStudy: React.FC<CatalogixCaseStudyProps> = ({ project, onClos
                 <div>
                   <div className="text-[11px] font-mono uppercase tracking-widest text-gray-500 mb-2.5">Operating range</div>
                   <p className="text-sm text-gray-300 leading-relaxed">
-                    Sole designer for the entire product: workspace console, store catalog, product
-                    record, import pipeline, taxonomy builder, AI training console, and review/repair
-                    flows — plus the design system underneath all of them.
+                    Designed the entire product end-to-end: workspace console, store catalog,
+                    product record, import pipeline, taxonomy builder, AI training console, and
+                    review/repair flows — plus the design system underneath all of them.
                   </p>
                 </div>
                 <div>
@@ -595,7 +595,7 @@ const CatalogixCaseStudy: React.FC<CatalogixCaseStudyProps> = ({ project, onClos
                 where it came from and how to override it.
               </Bullet>
               <Bullet>
-                A design system is how a sole designer ships an enterprise platform. The system was
+                A design system is how one designer ships an enterprise platform. The system was
                 never a side project; it was the job.
               </Bullet>
             </ul>
@@ -620,8 +620,8 @@ const CatalogixCaseStudy: React.FC<CatalogixCaseStudyProps> = ({ project, onClos
             <Crosshair side="right" />
             <div className="px-6 md:px-12 py-16 md:py-20 space-y-7">
               <p className="text-sm text-gray-500 leading-relaxed max-w-2xl">
-                Designed end-to-end as the sole product designer. Happy to walk through any decision,
-                file, or iteration live.
+                Designed end-to-end — every surface and the system underneath. Happy to walk through
+                any decision, file, or iteration live.
               </p>
               <div className="grid sm:grid-cols-2 gap-3.5">
                 <a

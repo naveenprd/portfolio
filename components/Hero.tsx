@@ -8,7 +8,7 @@ interface HeroProps {
 /* The first viewport carries evidence, not just the name: positioning eyebrow,
  * a concrete track-record line, and a spec strip echoing the case-study heroes. */
 const HERO_FACTS = [
-  { label: 'Currently', value: "Sole product designer across Streamoid's agentic retail platform" },
+  { label: 'Currently', value: "Product designer across Streamoid's agentic retail platform" },
   { label: 'Focus', value: 'Design systems · Enterprise workflows · AI products' },
   { label: 'Scale', value: '4 AI apps, one system · 30+ brands · 5M+ SKUs a year' },
 ];

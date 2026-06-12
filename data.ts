@@ -288,7 +288,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
       },
 
       operatingRange: {
-        scope: 'Sole designer for the entire product: workspace console, store catalog, product record, import pipeline, taxonomy builder, AI training console, and review/repair flows — plus the design system underneath all of them.',
+        scope: 'Designed the entire product end-to-end: workspace console, store catalog, product record, import pipeline, taxonomy builder, AI training console, and review/repair flows — plus the design system underneath all of them.',
         ambiguity: 'Joined when this was internal cataloging tooling; designed through the company\'s 2023 pivot from services to software and its repositioning as an agentic platform. The object model and information architecture had to survive each shift.',
         dependencies: [
           'CV/ML team (attribute-extraction models)',
@@ -417,7 +417,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
         'Density is earned, not defaulted: a completeness meter in context beats a dashboard nobody opens.',
         'AI trust is a UI property. Exposing per-attribute accuracy — including the embarrassing numbers — made teams use the AI more, not less.',
         'Inheritance without provenance is gaslighting: every inherited value needs to say where it came from and how to override it.',
-        'A design system is how a sole designer ships an enterprise platform. The system was never a side project; it was the job.'
+        'A design system is how one designer ships an enterprise platform. The system was never a side project; it was the job.'
       ],
       nextSteps: [
         'Deepen agent-supervision patterns: overnight runs need morning-after reviews, not real-time monitoring.',
