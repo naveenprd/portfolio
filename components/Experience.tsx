@@ -12,7 +12,8 @@ const Experience: React.FC = () => {
           <div className="lg:col-span-4 lg:sticky top-32 h-fit z-10">
             <h2 className="text-6xl font-display font-bold text-light mb-8">Career<br/>History</h2>
             <p className="text-gray-400 font-light text-lg leading-relaxed mb-12">
-              Leading design teams and crafting products for global brands.
+              Eight years from agency craft to enterprise AI platforms — agencies, a SaaS
+              product company, and an AI fashion OS.
             </p>
             <a href="/Naveen Manickam Resume.pdf" download className="inline-block px-8 py-3 border border-white/20 rounded-full text-light text-xs font-bold uppercase tracking-widest hover:bg-light hover:text-dark transition-all cursor-hover">
               Download Resume

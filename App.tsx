@@ -7,8 +7,10 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import ProjectModal from './components/ProjectModal';
-import ClosedCaseStudy, { isProjectUnlocked, clearProjectUnlock } from './components/ClosedCaseStudy';
+import ClosedCaseStudy, { isProjectUnlocked, clearProjectUnlock, unlockStorageKey } from './components/ClosedCaseStudy';
 import CXOCaseStudy from './components/CXOCaseStudy';
+import CatalogixCaseStudy from './components/CatalogixCaseStudy';
+import ShowcaseDeck from './components/ShowcaseDeck';
 import CustomCursor from './components/CustomCursor';
 import FloatingLinkedIn from './components/FloatingLinkedIn';
 import { ProjectItem } from './types';
@@ -28,6 +30,8 @@ function ProjectPage() {
 
   const unlocked = unlockedId === project.id || isProjectUnlocked(project.id);
   const needsGate = !!project.locked && !unlocked;
+  // Blueprint case studies (CXO, Catalogix) carry their own visual system — portfolio chrome stays out.
+  const isBlueprint = !!project.locked || project.id === 'catalogix';
 
   // Closing a locked case study re-locks it: next visit asks for the password again.
   const closeAndRelock = () => {
@@ -40,13 +44,12 @@ function ProjectPage() {
 
   return (
     <div className="bg-dark min-h-screen text-light selection:bg-accent selection:text-black">
-      {/* The CXO experience (gate + case study) has its own visual system — keep portfolio chrome out */}
-      {!project.locked && (
+      {!isBlueprint && (
         <div className="hidden md:block">
           <CustomCursor />
         </div>
       )}
-      {!project.locked && <FloatingLinkedIn />}
+      {!isBlueprint && <FloatingLinkedIn />}
       {needsGate ? (
         <ClosedCaseStudy
           project={project}
@@ -55,8 +58,59 @@ function ProjectPage() {
         />
       ) : project.locked ? (
         <CXOCaseStudy project={project} onClose={closeAndRelock} />
+      ) : project.id === 'catalogix' ? (
+        <CatalogixCaseStudy project={project} onClose={closeAndRelock} />
       ) : (
         <ProjectModal project={project} onClose={closeAndRelock} />
+      )}
+    </div>
+  );
+}
+
+/* The interview deck shares CXO's password; unlocking it also pre-unlocks the
+ * CXO case study so the deck's hand-off slide opens it without a second gate. */
+const SHOWCASE_GATE: ProjectItem = {
+  id: 'showcase',
+  title: 'Showcase',
+  subtitle: 'Interview presentation',
+  tags: [],
+  description: '',
+  imageUrl: '',
+  locked: true,
+  passwordHash: PROJECTS_DATA.find(p => p.id === 'cxo')?.passwordHash,
+};
+
+function ShowcasePage() {
+  const navigate = useNavigate();
+  const [unlockedNow, setUnlockedNow] = useState(false);
+  const unlocked = unlockedNow || isProjectUnlocked('showcase');
+
+  const handleUnlock = () => {
+    try {
+      sessionStorage.setItem(unlockStorageKey('cxo'), '1');
+    } catch {
+      // CXO will simply ask for the password again.
+    }
+    setUnlockedNow(true);
+  };
+
+  const closeAndRelock = () => {
+    clearProjectUnlock('showcase');
+    setUnlockedNow(false);
+    navigate('/');
+  };
+
+  return (
+    <div className="bg-dark min-h-screen text-light selection:bg-accent selection:text-black">
+      {unlocked ? (
+        <ShowcaseDeck onClose={closeAndRelock} />
+      ) : (
+        <ClosedCaseStudy
+          project={SHOWCASE_GATE}
+          kindLabel="Private Presentation"
+          onUnlock={handleUnlock}
+          onClose={() => navigate('/')}
+        />
       )}
     </div>
   );
@@ -115,6 +169,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/showcase" element={<ShowcasePage />} />
       <Route path="/:projectId" element={<ProjectPage />} />
     </Routes>
   );

@@ -8,6 +8,8 @@ interface ClosedCaseStudyProps {
   project: ProjectItem;
   onUnlock: () => void;
   onClose: () => void;
+  /** Label next to the title in the top bar, e.g. "Private Presentation". */
+  kindLabel?: string;
 }
 
 export const unlockStorageKey = (projectId: string) => `cs-unlocked:${projectId}`;
@@ -72,7 +74,7 @@ const Crosshair: React.FC<{ style: React.CSSProperties; delay: number }> = ({ st
   />
 );
 
-const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, onClose }) => {
+const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, onClose, kindLabel = 'Closed Case Study' }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -83,9 +85,6 @@ const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, on
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    // The portfolio's global grain overlay doesn't belong in the CXO visual system.
-    const noise = document.querySelector<HTMLElement>('.noise-bg');
-    if (noise) noise.style.display = 'none';
     // Auto-focus on desktop only; on mobile this would pop the keyboard immediately.
     const focusTimer = setTimeout(() => {
       if (window.matchMedia('(min-width: 768px)').matches) {
@@ -94,7 +93,6 @@ const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, on
     }, 1100); // after the entrance flow settles
     return () => {
       document.body.style.overflow = 'unset';
-      if (noise) noise.style.display = '';
       clearTimeout(focusTimer);
       if (unlockTimer.current) clearTimeout(unlockTimer.current);
     };
@@ -168,7 +166,7 @@ const ClosedCaseStudy: React.FC<ClosedCaseStudyProps> = ({ project, onUnlock, on
             <Lock size={14} style={{ color: CXO.accent }} />
           </div>
           <span className="text-sm font-display font-semibold tracking-wide text-white">{project.title}</span>
-          <span className="text-sm text-gray-500 hidden sm:inline">Closed Case Study</span>
+          <span className="text-sm text-gray-500 hidden sm:inline">{kindLabel}</span>
         </div>
         <div className="flex items-center gap-4">
           <span className="hidden md:inline-flex items-center gap-2 text-xs text-gray-500">

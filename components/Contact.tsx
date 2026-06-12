@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CONTACT_INFO } from '../data';
 import { motion } from 'framer-motion';
 
@@ -24,7 +25,7 @@ const Contact: React.FC = () => {
         <div className="mb-32 flex flex-col md:flex-row justify-between items-end gap-12">
           
           <div className="w-full">
-            <p className="text-accent text-xs font-mono uppercase tracking-widest mb-8">Initiate Protocol</p>
+            <p className="text-accent text-xs font-mono uppercase tracking-widest mb-8">Contact</p>
             <a 
               href={`mailto:${CONTACT_INFO.email}`} 
               className="block text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-display font-bold hover:text-accent transition-colors duration-300 leading-[0.9] tracking-tighter cursor-hover break-words"
@@ -53,6 +54,9 @@ const Contact: React.FC = () => {
                     <button onClick={handleCopyUrl} className="text-sm text-left hover:text-accent transition-colors cursor-hover">
                       {copied ? <span className="text-accent">URL copied!</span> : 'Website'}
                     </button>
+                    <Link to="/showcase" className="text-sm hover:text-accent transition-colors cursor-hover">
+                      Showcase
+                    </Link>
                 </div>
              </div>
              <div>
@@ -63,7 +67,7 @@ const Contact: React.FC = () => {
 
         <div className="flex justify-between items-center pt-24 text-[10px] text-gray-600 uppercase tracking-widest font-mono">
           <p>Naveen Manickam &copy; {new Date().getFullYear()}</p>
-          <p>System Online</p>
+          <p>Made in Bangalore</p>
         </div>
       </div>
     </footer>

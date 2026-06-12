@@ -11,8 +11,9 @@ interface CXOCaseStudyProps {
 }
 
 /* Same blueprint system as the gate: canvas #070707, panel #121212,
- * dashed hairline grid, indigo #5B67F2, Inter only. */
-const CXO = {
+ * dashed hairline grid, indigo #5B67F2. Shared by every blueprint case
+ * study (CXO, Catalogix) — the chrome below is exported for reuse. */
+export const CXO = {
   canvas: '#070707',
   panel: '#121212',
   row: '#181818',
@@ -29,7 +30,7 @@ const fadeUp = {
   transition: { duration: 0.45, ease: 'easeOut' as const },
 };
 
-const Crosshair: React.FC<{ side: 'left' | 'right' }> = ({ side }) => (
+export const Crosshair: React.FC<{ side: 'left' | 'right' }> = ({ side }) => (
   <div
     className="absolute top-0 w-2 h-2 border border-white/30 -translate-y-1/2 hidden md:block"
     style={{
@@ -54,7 +55,7 @@ interface SectionProps {
 const GUTTER_TITLE_TOP = 80; // index (~17px) + 4px gap above the 24px-tall title, centered on 114
 const GUTTER_NOTE_TOP = 104; // 20px-tall annotation row, centered on 114
 
-const Section: React.FC<SectionProps> = ({ index, title, annotation, children }) => (
+export const Section: React.FC<SectionProps> = ({ index, title, annotation, children }) => (
   <section className="relative border-t border-dashed border-white/10">
     <Crosshair side="left" />
     <Crosshair side="right" />
@@ -86,13 +87,13 @@ const Section: React.FC<SectionProps> = ({ index, title, annotation, children })
   </section>
 );
 
-const Panel: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
+export const Panel: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
   <div className={`rounded-xl border border-white/10 p-6 md:p-8 ${className}`} style={{ backgroundColor: CXO.panel }}>
     {children}
   </div>
 );
 
-const FigureCard: React.FC<{ src: string; alt: string; caption: string }> = ({ src, alt, caption }) => (
+export const FigureCard: React.FC<{ src: string; alt: string; caption: string }> = ({ src, alt, caption }) => (
   <figure className="rounded-xl border border-white/10 overflow-hidden" style={{ backgroundColor: CXO.panel }}>
     <img src={src} alt={alt} loading="lazy" className="w-full block" />
     <figcaption className="px-6 py-4 text-xs leading-relaxed text-gray-500 border-t border-white/10">{caption}</figcaption>
@@ -161,12 +162,12 @@ const HERO_FACTS = [
   { label: 'Platform', value: 'CXO + Artifax · Photogenix · Catalogix' },
 ];
 
-const FactStrip: React.FC = () => (
+export const FactStrip: React.FC<{ facts?: { label: string; value: string }[] }> = ({ facts = HERO_FACTS }) => (
   <div
     className="rounded-xl border border-white/10 grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden"
     style={{ backgroundColor: CXO.row }}
   >
-    {HERO_FACTS.map(f => (
+    {facts.map(f => (
       <div key={f.label} className="px-6 py-5">
         <div className="text-[11px] font-mono uppercase tracking-widest text-gray-500 mb-2.5">{f.label}</div>
         <div className="text-sm text-gray-200 leading-relaxed">{f.value}</div>
@@ -175,7 +176,7 @@ const FactStrip: React.FC = () => (
   </div>
 );
 
-const Bullet: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Bullet: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <li className="flex items-start gap-3 text-base text-gray-300 leading-relaxed">
     <span className="mt-[9px] w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: CXO.accent }} />
     <span>{children}</span>
@@ -185,11 +186,8 @@ const Bullet: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 const CXOCaseStudy: React.FC<CXOCaseStudyProps> = ({ project, onClose }) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    const noise = document.querySelector<HTMLElement>('.noise-bg');
-    if (noise) noise.style.display = 'none';
     return () => {
       document.body.style.overflow = 'unset';
-      if (noise) noise.style.display = '';
     };
   }, []);
 

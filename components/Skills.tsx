@@ -14,7 +14,7 @@ const Skills: React.FC = () => {
                viewport={{ once: true }}
                transition={{ duration: 0.6 }}
              >
-               <h2 className="text-accent font-mono text-xs uppercase tracking-[0.2em] mb-4">Tech Stack & Tools</h2>
+               <h2 className="text-accent font-mono text-xs uppercase tracking-[0.2em] mb-4">Capabilities</h2>
                <p className="text-4xl md:text-5xl font-display font-bold text-light leading-tight">
                   Designed for scale. Built for speed.
                </p>
