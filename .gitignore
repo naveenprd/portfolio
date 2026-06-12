@@ -29,3 +29,10 @@ migrated_prompt_history
 
 # CXO source exports (NDA) — the site uses the webp copies in public/images/cxo
 CXO-Assets/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
